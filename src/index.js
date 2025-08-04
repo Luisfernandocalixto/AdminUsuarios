@@ -6,8 +6,8 @@ import App from './App.js';
 import Get from './Get.js';
 import Update from './Update.js';
 import reportWebVitals from './reportWebVitals';
-
-
+import { Toaster } from 'react-hot-toast';
+// describe  the routes of the app
 const router = createBrowserRouter([
   {
     path: "/add",
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <Get />
   },
   {
-    path: "/update/:id",
+    path: "/update/:id/:email/:name",
     element: <Update />
   },
 ])
@@ -28,8 +28,16 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
+    <>
+      <RouterProvider router={router} />
+      <div>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
+      </div>
+    </>
 
-    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

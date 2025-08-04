@@ -1,5 +1,5 @@
 :root {
-  background: #282c34 !important;
+  background: #282c34;
 }
 
 .App {
@@ -16,8 +16,8 @@
   min-width: 100%;
   grid-template-areas:
     "header header header"
-    "sidebar content content"
-    "sidebar footer footer"
+    "content content content"
+    "footer footer footer"
   ;
 }
 
@@ -25,14 +25,14 @@
   .container {
     grid-template-areas:
       "header header header"
-      "sidebar  content  content"
-      "sidebar footer footer"
+      "content  content  content"
+      "footer footer footer"
     ;
 
   }
 
   aside {
-    overflow: scroll;
+    /* overflow: scroll; */
 
   }
 
@@ -55,6 +55,7 @@
 }
 
 .container aside {
+background: #282c34;
   grid-area: sidebar;
 
 }
