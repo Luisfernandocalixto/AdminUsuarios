@@ -18,7 +18,7 @@ export const handleSubmit = async (e, REACT_APP_API_URL, toast, setIsDisabled, n
     
     } else {
 
-        fetch(REACT_APP_API_URL, {
+        fetch(`${REACT_APP_API_URL}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

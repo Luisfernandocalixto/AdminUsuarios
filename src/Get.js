@@ -13,7 +13,7 @@ function Get() {
   const [users, setUsers] = useState([]);
 
   React.useEffect(() => {
-  fetch(REACT_APP_API_URL, {
+  fetch(`${REACT_APP_API_URL}`, {
     method: 'GET',
     headers :{
       'Content-Type': 'application/json',
