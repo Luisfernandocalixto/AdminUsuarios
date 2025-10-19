@@ -1,7 +1,7 @@
 import { PiUsersThree } from "react-icons/pi";
 import { IoIosArrowUp, IoIosArrowForward } from "react-icons/io";
 import { useMenu } from "./hooks/menu";
-
+import { Link } from "react-router-dom";
 
 
 export default function Aside() {
@@ -13,13 +13,13 @@ export default function Aside() {
 
             {
                 isOpenMenu ? (
-                    <button onClick={closeMenu} className="transition duration-500  flex justify-center items-center absolute top-4 right-4 cursor-pointer translate-x-9 bg-amber-500 rounded-full">
+                    <button type="button" name="close" aria-label="closeMenu" onClick={closeMenu} className="transition duration-500  flex justify-center items-center absolute top-4 right-4 cursor-pointer translate-x-9 bg-amber-500 rounded-full">
                         <IoIosArrowForward className="size-10 -rotate-180" />
                     </button>
 
                 ) : (
 
-                    <button onClick={openMenu} className="transition duration-500 flex justify-center items-center absolute top-4 right-4 cursor-pointer translate-x-9 bg-amber-500 rounded-full">
+                    <button type="button" name="open" aria-label="openMenu" onClick={openMenu} className="transition duration-500 flex justify-center items-center absolute top-4 right-4 cursor-pointer translate-x-9 bg-amber-500 rounded-full">
                         <IoIosArrowForward className="size-10" />
                     </button>
                 )
@@ -31,12 +31,11 @@ export default function Aside() {
                     </span>
                     <ul className="mt-6 space-y-1">
                         <li>
-                            <a
-                                href="#"
+                            <p
                                 className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
                             >
                                 General
-                            </a>
+                            </p>
                         </li>
 
                         <li>
@@ -53,42 +52,39 @@ export default function Aside() {
 
                                 <ul className="mt-2 space-y-1 px-4">
                                     <li>
-                                        <a
-                                            href="/add"
+                                        <Link
+                                            to="/add"
                                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                                         >
                                             Usuarios
-                                        </a>
+                                        </Link>
                                     </li>
 
                                     <li>
-                                        <a
-                                            href="#"
+                                        <p
                                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                                         >
                                             Calendario
-                                        </a>
+                                        </p>
                                     </li>
                                 </ul>
                             </details>
                         </li>
 
                         <li>
-                            <a
-                                href="#"
+                            <p
                                 className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                             >
                                 Facturación
-                            </a>
+                            </p>
                         </li>
 
                         <li>
-                            <a
-                                href="#"
+                            <p
                                 className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                             >
                                 Facturas
-                            </a>
+                            </p>
                         </li>
 
                         <li>
@@ -106,21 +102,19 @@ export default function Aside() {
 
                                 <ul className="mt-2 space-y-1 px-4">
                                     <li>
-                                        <a
-                                            href="#"
+                                        <p
                                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                                         >
                                             Detalles
-                                        </a>
+                                        </p>
                                     </li>
 
                                     <li>
-                                        <a
-                                            href="#"
+                                        <p
                                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                                         >
                                             Seguridad
-                                        </a>
+                                        </p>
                                     </li>
 
                                 </ul>

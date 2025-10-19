@@ -16,3 +16,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.mt-5.z-0.text-white {
+  & button:hover {
+    color: black;
+
+    &:not(:hover),
+    &:disabled {
+      color: white;
+    }
+  }
+
+}

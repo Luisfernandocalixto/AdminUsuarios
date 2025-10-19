@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import  { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import './App.css';
 import './input.css';
 import Aside from './Aside.js';
@@ -8,74 +8,70 @@ import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import toast from 'react-hot-toast';
 import {REACT_APP_API_URL} from '../src/config/data.js';
+import Pagination from './ui/users/pagination.js';
+import { searchUsers } from './services/users.js';
+import { isHandleDelete } from './functions/funtions.js';
 
 function Get() {
   const [users, setUsers] = useState([]);
-
-  React.useEffect(() => {
-  fetch(`${REACT_APP_API_URL}`, {
-    method: 'GET',
-    headers :{
-      'Content-Type': 'application/json',
-    }
-    
-  })
-  .then((res) => res.json())
-  .then((data) => setUsers(data));
-}, [])
+  const [pages, setPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams] = useSearchParams();
 
 
-const handleDelete = async (id) => {
-  fetch(`${REACT_APP_API_URL}/${id}`, {
-    method: 'DELETE',
-    headers :{
-      'Content-Type': 'application/json',
-    }
-  })
-      .then((res) => {
-        if (!res.ok) {
-            toast.error('error al eliminar usuario!')
-          }
-          if (res.ok) {
-          toast.success('usuario eliminado!')
-          return res.json()
-        }
+  useEffect(() => {
+    (async () => {
+
+      try {
+        const fetchUsers = await searchUsers({ currentPage: searchParams })
+        const { users, totalPages } = fetchUsers;
+        setUsers(users)
+        setPages(totalPages)
+      } catch (error) {
+        toast.error('error al cargar datos!')
+      } finally {
+      }
+    })()
+  }, [searchParams])
 
 
-      })
-      .then((data) => {
-        const remaining = users.filter((user) => user._id !== data['_id']);
-        setUsers(remaining)
-      });
+
+  const handleDelete = async (id) => {
+    isHandleDelete(id, REACT_APP_API_URL, toast, users, setUsers)
   }
-
-
-  return (
-    <div className="App">
+   
+        
+    
+    return (
+      <div className="App">
       <div className='container'>
         <header></header>
         <main >
           <h1 className='text-3xl text-amber-500'>Lista de usuarios</h1>
-          <h4 className='text-white text-2xl'>Cantidad: 
+          <p className='text-white text-2xl'>Cantidad: 
             {users ? users.length : `Not users found`}
-          </h4>
+          </p>
+            <div className='mt-5 z-0 text-white'>
+              <Pagination totalPages={pages} currentPage={currentPage} />
+            </div>
           {
 
             users ? users.map((user) => (
-              <div key={user._id} className='rounded-xl border border-gray-100 bg-white p-4 m-4 animate__animated animate__fadeIn'>
+              <div key={user.id} className='rounded-xl border border-gray-100 bg-white p-4 m-4 animate__animated animate__fadeIn'>
                 <div>
                   {user.name} - {user.email}
                 </div>
                 <span className='inline-flex overflow-hidden rounded-md border bg-white shadow-sm'>
 
-                  <Link to={`/update/${user._id}/${user.email}/${user.name}`}>
-                    <button className='inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative' title='Edit'>
+                  <Link to={`/update/${user.id}/${user.email}/${user.name}`}>
+                    <button type='button' name='button'  id='edit' aria-label='Edit' className='inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative' title='Edit'>
 
                     <HiOutlinePencilSquare />
                     </button>
                   </Link>
 
-                  <button className='inline-block p-3 text-gray-700 hover:bg-gray-50 focus:relative' onClick={() => handleDelete(user._id)}>
+                  <button type='button' name='button'  id='delete' aria-label='Delete' title='Delete'  
+                  className='inline-block p-3 text-gray-700 hover:bg-gray-50 focus:relative' onClick={() => handleDelete(user.id)}>
                   <RiDeleteBin6Line />
 
                   </button>
@@ -86,7 +82,7 @@ const handleDelete = async (id) => {
           }
         </main>
 
-        <aside className='border-e fixed top-0'>
+        <aside className='border-e fixed top-0 z-[10]'>
           <Aside />
         </aside>
 

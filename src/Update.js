@@ -6,8 +6,8 @@ import 'animate.css'
 import toast from 'react-hot-toast';
 import { MdAlternateEmail} from "react-icons/md";
 import { REACT_APP_API_URL } from "../src/config/data.js";
-import { handleSubmit } from "./functions/byUpdate.js";
 import { validatePartialUser } from "./security/functions.js";
+import { isHandleUpdate } from "./functions/funtions.js";
 
 function Update() {
   const params = useParams();
@@ -26,7 +26,7 @@ function Update() {
 
 
    const isHandleSubmit = (e) => {
-       handleSubmit(e , REACT_APP_API_URL, toast, setIsDisabled, navigate, params)
+       isHandleUpdate(e , REACT_APP_API_URL, toast, setIsDisabled, navigate, params)
      }
   
 

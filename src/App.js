@@ -7,7 +7,7 @@ import { CiUser } from "react-icons/ci";
 import { Link , useNavigate, } from 'react-router-dom';
 import { REACT_APP_API_URL } from './config/data.js';
 import { useState } from 'react';
-import { handleSubmit } from './functions/byApp.js';
+import { isHandleCreate } from './functions/funtions.js';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
 
 
  const isHandleSubmit = (e) => {
-   handleSubmit(e, REACT_APP_API_URL, toast, setIsDisabled, navigate)
+   isHandleCreate(e, REACT_APP_API_URL, toast, setIsDisabled, navigate)
 
  }
 
