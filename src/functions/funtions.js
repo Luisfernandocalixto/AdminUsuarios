@@ -1,26 +1,29 @@
 import { validatePartialUser } from "../security/functions";
 export const isHandleDelete = (id, REACT_APP_API_URL, toast, users, setUsers) => {
-    fetch(`${REACT_APP_API_URL}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-        .then((res) => {
-            if (!res.ok) {
-                toast.error('error al eliminar usuario!')
-            }
-            if (res.ok) {
-                toast.success('usuario eliminado!')
-                return res.json()
-            }
+    if (window.confirm("Estas seguro de eliminar el usuario?")) {
 
-
+        fetch(`${REACT_APP_API_URL}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         })
-        .then((data) => {
-            const remaining = users.filter((user) => user.id !== data['id']);
-            setUsers(remaining)
-        });
+            .then((res) => {
+                if (!res.ok) {
+                    toast.error('error al eliminar usuario!');
+                }
+                if (res.ok) {
+                    toast.success('usuario eliminado!');
+                    return res.json();
+                }
+
+
+            })
+            .then((data) => {
+                const remaining = users.filter((user) => user.id !== data['id']);
+                setUsers(remaining);
+            });
+    }
 
 }
 
@@ -33,12 +36,12 @@ export const isHandleCreate = async (e, REACT_APP_API_URL, toast, setIsDisabled,
     const sendData = { name, email };
 
 
-    const verifyData = validatePartialUser({ email, name })
+    const verifyData = validatePartialUser({ email, name });
     if (!verifyData.success) {
         const message = JSON.parse(verifyData.error);
         const errors = message.map(err => `${err.message}, `);
-        toast.error(errors)
-        setIsDisabled(true)
+        toast.error(errors);
+        setIsDisabled(true);
 
     } else {
 
@@ -51,21 +54,21 @@ export const isHandleCreate = async (e, REACT_APP_API_URL, toast, setIsDisabled,
         })
             .then((res) => {
                 if (!res.ok) {
-                    toast.error('error al registrar usuario!')
+                    toast.error('error al registrar usuario!');
                 }
                 if (res.ok) {
-                    toast.success('usuario registrado!')
-                    navigate("/") // redirect to home page
-                    res.json()
+                    toast.success('usuario registrado!');
+                    navigate("/"); // redirect to home page
+                    res.json();
 
                 }
 
             })
             .catch((error) => {
-                toast.error('error al registrar usuario!')
+                toast.error('error al registrar usuario!');
             })
             .finally(() => {
-                setIsDisabled(false)
+                setIsDisabled(false);
             })
 
     }
@@ -79,12 +82,12 @@ export const isHandleUpdate = async (e, REACT_APP_API_URL, toast, setIsDisabled,
     const email = form.email.value;
     const name = form.name.value;
 
-    const verifyData = validatePartialUser({ id: params.id, email, name })
+    const verifyData = validatePartialUser({ id: params.id, email, name });
     if (!verifyData.success) {
         const message = JSON.parse(verifyData.error);
         const errors = message.map(err => `${err.message}, `);
-        toast.error(errors)
-        setIsDisabled(true)
+        toast.error(errors);
+        setIsDisabled(true);
 
     } else {
 
@@ -97,18 +100,18 @@ export const isHandleUpdate = async (e, REACT_APP_API_URL, toast, setIsDisabled,
         })
             .then((res) => {
                 if (!res.ok) {
-                    toast.error('error al actualizar usuario!')
+                    toast.error('error al actualizar usuario!');
                 }
                 if (res.ok) {
-                    toast.success('usuario actualizado!')
-                    navigate("/")
-                    res.json()
+                    toast.success('usuario actualizado!');
+                    navigate("/");
+                    res.json();
 
                 }
 
             })
             .finally(() => {
-                setIsDisabled(false)
+                setIsDisabled(false);
             })
 
     }

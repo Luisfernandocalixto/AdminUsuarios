@@ -2,7 +2,7 @@ import { CiUser } from "react-icons/ci";
 import React, { useState } from 'react';
 import './App.css';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import 'animate.css'
+import 'animate.css';
 import toast from 'react-hot-toast';
 import { MdAlternateEmail} from "react-icons/md";
 import { REACT_APP_API_URL } from "../src/config/data.js";
@@ -13,9 +13,9 @@ function Update() {
   const params = useParams();
   const [user, setUser] = useState({id : params.id, email: params.email, name: params.name});
   const navigate = useNavigate();
-  const [isDisabled, setIsDisabled] = useState(true)
+  const [isDisabled, setIsDisabled] = useState(true);
 
-   const verifyData = validatePartialUser(params)
+   const verifyData = validatePartialUser(params);
 
   if (!verifyData.success) {
         const message = JSON.parse(verifyData.error);
@@ -26,7 +26,7 @@ function Update() {
 
 
    const isHandleSubmit = (e) => {
-       isHandleUpdate(e , REACT_APP_API_URL, toast, setIsDisabled, navigate, params)
+       isHandleUpdate(e , REACT_APP_API_URL, toast, setIsDisabled, navigate, params);
      }
   
 

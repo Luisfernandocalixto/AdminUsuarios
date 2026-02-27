@@ -1,6 +1,6 @@
 import './App.css';
 import './input.css';
-import 'animate.css'
+import 'animate.css';
 import toast from 'react-hot-toast';
 import { MdAlternateEmail } from "react-icons/md";
 import { CiUser } from "react-icons/ci";
@@ -11,12 +11,12 @@ import { isHandleCreate } from './functions/funtions.js';
 
 
 function App() {
-  const [isDisabled, setIsDisabled] = useState(true)
+  const [isDisabled, setIsDisabled] = useState(true);
   const navigate = useNavigate();
 
 
  const isHandleSubmit = (e) => {
-   isHandleCreate(e, REACT_APP_API_URL, toast, setIsDisabled, navigate)
+   isHandleCreate(e, REACT_APP_API_URL, toast, setIsDisabled, navigate);
 
  }
 

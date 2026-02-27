@@ -11,25 +11,29 @@ import {REACT_APP_API_URL} from '../src/config/data.js';
 import Pagination from './ui/users/pagination.js';
 import { searchUsers } from './services/users.js';
 import { isHandleDelete } from './functions/funtions.js';
+import { CardLoading } from './components/cardsLoading.js';
 
 function Get() {
   const [users, setUsers] = useState([]);
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
     (async () => {
 
       try {
-        const fetchUsers = await searchUsers({ currentPage: searchParams })
+        setLoading(true);
+        const fetchUsers = await searchUsers({ currentPage: searchParams });
         const { users, totalPages } = fetchUsers;
-        setUsers(users)
-        setPages(totalPages)
+        setUsers(users);
+        setPages(totalPages);
       } catch (error) {
-        toast.error('error al cargar datos!')
+        toast.error('error al cargar datos!');
       } finally {
+        setLoading(false);
       }
     })()
   }, [searchParams])
@@ -37,7 +41,7 @@ function Get() {
 
 
   const handleDelete = async (id) => {
-    isHandleDelete(id, REACT_APP_API_URL, toast, users, setUsers)
+    isHandleDelete(id, REACT_APP_API_URL, toast, users, setUsers);
   }
    
         
@@ -56,7 +60,8 @@ function Get() {
             </div>
           {
 
-            users ? users.map((user) => (
+            loading ? <CardLoading/>
+                : users.map((user) => (
               <div key={user.id} className='rounded-xl border border-gray-100 bg-white p-4 m-4 animate__animated animate__fadeIn'>
                 <div>
                   {user.name} - {user.email}
@@ -78,7 +83,7 @@ function Get() {
                 </span>
               </div>
             ))
-              : ''
+            
           }
         </main>
 

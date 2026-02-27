@@ -2,6 +2,7 @@ import { PiUsersThree } from "react-icons/pi";
 import { IoIosArrowUp, IoIosArrowForward } from "react-icons/io";
 import { useMenu } from "./hooks/menu";
 import { Link } from "react-router-dom";
+import 'animate.css';
 
 
 export default function Aside() {
@@ -13,18 +14,18 @@ export default function Aside() {
 
             {
                 isOpenMenu ? (
-                    <button type="button" name="close" aria-label="closeMenu" onClick={closeMenu} className="transition duration-500  flex justify-center items-center absolute top-4 right-4 cursor-pointer translate-x-9 bg-amber-500 rounded-full">
+                    <button type="button" name="close" aria-label="closeMenu" onClick={closeMenu} className="transition duration-500  ease-in-out flex justify-center items-center absolute top-4 right-4 cursor-pointer translate-x-9 bg-amber-500 rounded-full">
                         <IoIosArrowForward className="size-10 -rotate-180" />
                     </button>
 
                 ) : (
 
-                    <button type="button" name="open" aria-label="openMenu" onClick={openMenu} className="transition duration-500 flex justify-center items-center absolute top-4 right-4 cursor-pointer translate-x-9 bg-amber-500 rounded-full">
+                    <button type="button" name="open" aria-label="openMenu" onClick={openMenu} className="transition duration-500 ease-in-out flex justify-center items-center absolute top-4 right-4 cursor-pointer translate-x-9 bg-amber-500 rounded-full">
                         <IoIosArrowForward className="size-10" />
                     </button>
                 )
             }
-            <div className={`${isOpenMenu ? 'w-[300px]' : 'w-1 overflow-hidden'}  relative  flex h-screen flex-col justify-between`}>
+            <div className={`${isOpenMenu ? 'w-[300px]' : 'w-1 overflow-hidden'} transition-all duration-[450ms] ease-in-out  relative  flex h-screen flex-col justify-between`}>
                 <div className="px-4 py-6">
                     <span className="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
                         <PiUsersThree className='size-10' />
