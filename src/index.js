@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.js';
 import Get from './Get.js';
 import Update from './Update.js';
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     path: "/update/:id/:email/:name",
     element: <Update />
   },
-])
+]);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

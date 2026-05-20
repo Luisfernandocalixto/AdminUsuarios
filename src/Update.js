@@ -20,8 +20,8 @@ function Update() {
   if (!verifyData.success) {
         const message = JSON.parse(verifyData.error);
         const errors = message.map(err => `${err.message}, `);
-        toast.error(errors)
-        setIsDisabled(true)
+        toast.error(errors);
+        setIsDisabled(true);
    }
 
 

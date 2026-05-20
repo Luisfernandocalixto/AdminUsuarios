@@ -7,7 +7,7 @@ import 'animate.css';
 
 export default function Aside() {
     // imports  actions of hook useMenu
-    const { isOpenMenu, openMenu, closeMenu } = useMenu()
+    const { isOpenMenu, openMenu, closeMenu } = useMenu();
 
     return (
         <>
